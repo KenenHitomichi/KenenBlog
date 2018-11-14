@@ -1,4 +1,4 @@
-/*(function($) {
+(function($) {
     var GalMenu = {
         defaults: {
             click_to_close: true,
@@ -129,4 +129,3 @@ String.prototype.pF = function() {
 Number.prototype.pF = function() {
     return parseFloat(this)
 };
-*/
