@@ -845,7 +845,7 @@ body {
   cursor: url("images/icon.png"), default;
 }
 .outer {
-  max-width: 964px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 20px;
   positon: relative;
@@ -867,7 +867,7 @@ body {
 .inner {
   display: inline;
   float: left;
-  width: 98.33333333333333%;
+  width: 93.33333333333333%;
   margin: 0 0.833333333333333%;
 }
 .left,
@@ -909,7 +909,7 @@ body {
   #main {
     display: inline;
     float: left;
-    width: 73.33333333333333%;
+    width: 69.58333333333333%;
     margin: 0 0.833333333333333%;
   }
 }
@@ -2268,7 +2268,7 @@ pre .javascript .function {
   #sidebar {
     display: inline;
     float: left;
-    width: 23.333333333333332%;
+    width: 22.083333333333332%;
     margin: 0 0.833333333333333%;
   }
 }
