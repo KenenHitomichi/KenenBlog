@@ -1,8 +1,9 @@
 (function($){
   // Search
   var footerHeight = footer.offsetHeight;
-  $("#wrap > .outer").css("min-height",document.body.clientHeight - footerHeight + "px");
-  $(window).resize(()=> { $("#wrap > .outer").css("min-height",document.body.clientHeight - footerHeight + "px");});
+  $("#wrap > .outer").css("min-height",document.body.offsetHeight - footerHeight + "px");
+  $(window).resize(()=> { $("#wrap > .outer").css("min-height",document.body.offsetHeight - footerHeight + "px");});
+  setTimeout(()=>{$("#wrap > .outer").css("min-height",document.body.offsetHeight - footer.offsetHeight + "px");}, 2000); 
   var $searchWrap = $('#search-form-wrap'),
     isSearchAnim = false,
     searchAnimDuration = 200;

@@ -845,6 +845,7 @@ body {
   cursor: url("images/icon.png"), default;
 }
 .outer {
+  overflow: hidden;
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 20px;
@@ -888,7 +889,6 @@ body {
   overflow: hidden;
 }
 #wrap {
-  overflow-x: hidden;
   height: 100%;
   width: 100%;
   position: absolute;
