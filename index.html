@@ -5,13 +5,16 @@
   
   <title>Kenen&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Hello!">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Kenen&#39;s Blog">
 <meta property="og:url" content="http://kenen.com/index.html">
 <meta property="og:site_name" content="Kenen&#39;s Blog">
+<meta property="og:description" content="Hello!">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Kenen&#39;s Blog">
+<meta name="twitter:description" content="Hello!">
   
     <link rel="alternate" href="/atom.xml" title="Kenen&#39;s Blog" type="application/atom+xml">
   
@@ -36,10 +39,10 @@
   <div class="widget">
     <img class="avatar" src="https://avatars3.githubusercontent.com/u/34621978?s=460&amp;v=4">
     <h2 class="author">Kenen</h2>
-    <h3 class="description"></h3>
+    <h3 class="description">Hello!</h3>
     <div class="count-box">
       <a href="/archives"><div><strong>2</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>2</strong><br>分类</div></a>
+      <a href="/categories"><div><strong>3</strong><br>分类</div></a>
       <a href="/tags"><div><strong>3</strong><br>标签</div></a>
     </div>
     <ul class="blog-link">
@@ -90,7 +93,7 @@
         <div>
           
   <div class="article-category">
-    <a class="article-category-link" href="/categories/RM/">RM</a>
+    <a class="article-category-link" href="/categories/RM/">RM</a>,<a class="article-category-link" href="/categories/RM/PID/">PID</a>
   </div>
 
           
@@ -117,20 +120,27 @@ MathJax.Hub.Config({
 </script>
 <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 
-<p>&emsp;闭环（closed-loop）控制技术都是基于反馈的概念减少系统的不确定性（uncertainty）以实现系统的稳态（steady state）。反馈理论包括三个要素：测量（measurement）、比较（comparision）和执行（execution）。测量关键的是被控变量的实际值，与期望值相比较，用这个偏差（$e$ , Error）来纠正系统的响应，执行调节控制。在实际工程中，应用最为广泛的即为比例（Proportion）、积分（Integral）、微分（Differential）控制，简称PID控制或PID调节。当我们不完全了解一个系统和被控对象，或不能通过有效的测量手段来获得系统参数时，最适合用PID控制技术。</p>
-<p>&emsp;PID控制器（比例-积分-微分控制器）是一个在工业控制应用中常见的反馈回路部件，由比例单元P、积分单元I和微分单元D组成。PID控制的基础是比例控制；积分控制可消除稳态误差（$e_{ss}$ , Steady-State Errors），但可能增加超调（overshoot）；微分控制可加快大惯性系统响应速度以及减弱超调趋势。</p>
-<h3 id="比例控制-Proportion-Control"><a href="#比例控制-Proportion-Control" class="headerlink" title="比例控制 (Proportion Control)"></a>比例控制 (Proportion Control)</h3><p>&emsp;对于某个系统（system），如果要求在 $x$ 状态下实现稳态，设时间t时状态为 $x_0$ ，则偏差 $e(t) = x_0 - x$ 。假定每次的改变量: $$u(t) = k_p e$$&emsp;$e(t+T) = e(t) - u(t)$ ，改变量为误差的正比例函数，$kp$ 被称为比例系数（proportional coefficient），那么在经过n次改变之后，显然有： $$e(t) = e(nT) = (1 - k_p)^n \cdot (x_0 - x)$$ &emsp;若要让系统能够从某一方向逼近稳态，应满足 $0&lt; k_p\leq1$ ，那么 $e(t)$ 将在无穷处收敛于0，且 $u(t)$ 也为0。$kp$ 越大，则 $\vert e(t)\vert$ 下降速度越快。如果我们减小 $kp$ ，需要更长的时间来逼近 $x$。显然，当我们能足够精确控制系统的改变量，那么最优的情况就是 $k_p=1$，改变一次即可。然而在实际情况中，我们往往无法控制绝对的精度与准确度（precise and accurate），这显然不符合我们的实际需要。（Hint: 在非1的情况下，$e(t)$ 和 $u(t)$ 只能逼近0但不能等于0）</p>
-<p>&emsp;为更加切合实际，我们给改变量加上一个新的误差 $c$。为方便分析，我们假定 $c$ 为常数（即每次改变都会有一次常数误差）。那么，$u(t) = k_pe(t)-c$（此时，改变量为偏差的一次函数）。在系统达到稳态时，也就是 $u(t)=0$时，我们有：$$e(t) = e_{ss} = \frac{c}{k_p}$$&emsp;这就意味着，只要该误差存在（若 $c$ 不为常数，令 $ c=c(t) $，以上分析对于某一次改变也成立），那么在系统达到稳态时，$\vert e(t)\vert&gt;0$ ，系统无法在稳态下达到状态 $x$，产生了稳态误差，又称静差（steady-state error）。从中我们可以看出，增大 $k_p$ 有利于减小静差（但仍然存在）。</p>
-<p>&emsp;①通过上述分析可知，在比例控制中，增大比例系数有利于减小静差并提升速度（加快系统响应），但不利于系统的稳定性；减小比例系数有利于增加系统的稳定性，但会增大静差并减缓速度。在实际应用中，我们需要对二者进行平衡。<br>&emsp;② $e(t) = e(nT) = (1 - k_p)^n \cdot (x_0 - x)$ 仅是在理想状态下（无误差）的公式，用来分析比例系数的影响。实际上，e(t)的图像并不完全符合该等式，这是由于每个 $\Delta x$ 都会产生误差。其直观体现就是，当 $ e \to e_{ss} $ 时，$ \Delta x \ne 0 $。也就是说，系统会产生振荡，造成不稳定的现象。</p>
-<h3 id="积分控制（Integral-Control）"><a href="#积分控制（Integral-Control）" class="headerlink" title="积分控制（Integral Control）"></a>积分控制（Integral Control）</h3><p>&emsp;通过比例控制的概述，我们可以看到在实际应用中，仅通过比例控制，我们无法消除静差（误差是不可避免的）。那么，我们必然要有一种能够用来消除静差的手段，使系统能够稳定在 $x$ 状态下。令：$$u(t) = k_pe(t)+f(t)$$&emsp;我们假设在第n个采样点（$t=nT$），系统达到稳态的情况。也就是说，$e(t)=0 \land u(t)=0$。此时，理论上$u(t)=k_pe(t)+f(t)$。假定此时存在一个误差$c(t)$，则实际$u(t)=k_pe(t)+f(t)-c(t)$。若$f(t)=0$，将产生$e_{ss}=\frac{c(t)}{k_p}$（该情况同比例控制）。为使$e_{ss}=0$，我们必然有$f(t)=f(nT)=c(t)$。这就意味着该函数在平衡时其值为一固定值。</p>
-<p>&emsp;我们可以通过如下方式来构造一个f(t)函数：<br>&emsp;&emsp;①当 $e(t)&gt;0$ 时，$f(t)$ 增加使得 $u(t)$ 增加，令 $e(t)$ 最后能够回到0<br>&emsp;&emsp;②当 $e(t)&lt;0$ 时，$f(t)$ 减小使得 $u(t)$ 减小，令 $e(t)$ 最后能够回到0<br>&emsp;&emsp;③当 $e(t)=0$ 时，若 $u(t)\ne0$ ，则 $f(t)$ 仅在该处不变；若 $u(t)=0$ ，则系统达到平衡态，此时满足 $e(t)=0 \land u(t)=0$。</p>
-<p>&emsp;显然，函数 $f(t)=k_i\int_0^te(t)dt$ 满足条件①②③（其中 $k_i$ 为任意正数）。也就是说，我们可以用 $e(t)$ 的积分来消除静差。整合后得到：$$u(t) = k_p\left(e(t)+\frac{1}{T_i}\int_0^te(t)dt\right)$$&emsp;在该式中，$T_i$ 为积分时间常量（time constant of integrator）。</p>
-<p>&emsp;在比例控制的情况下，偏差永远是单方向趋向于$e_{ss}$的，即： $\forall t(e(t)\ge e_{ss}) \lor \forall t(e(t)\le e_{ss})$。若引入积分控制，曲线可能出现振荡使得存在方向相反的组合 $(e(0), e(t))$ 。这种情况，我们称其为超调（overshoot）。显然，$T_i$的减小或$k_p$的增大都会导致超调量的增大，但同时也会加快系统响应。</p>
-<h3 id="微分控制（Differential-Control）"><a href="#微分控制（Differential-Control）" class="headerlink" title="微分控制（Differential Control）"></a>微分控制（Differential Control）</h3>
+<p>&emsp;&emsp;闭环（closed-loop）控制技术都是基于反馈的概念减少系统的不确定性（uncertainty）以实现系统的稳态（steady state）。反馈理论包括三个要素：测量（measurement）、比较（comparision）和执行（execution）。测量关键的是被控变量的实际值，与期望值相比较，用这个偏差（$e$ , Error）来纠正系统的响应，执行调节控制。在实际工程中，应用最为广泛的即为比例（Proportion）、积分（Integral）、微分（Differential）控制，简称PID控制或PID调节。当我们不完全了解一个系统和被控对象，或不能通过有效的测量手段来获得系统参数时，最适合用PID控制技术。</p>
+<p>&emsp;&emsp;PID控制器（比例-积分-微分控制器）是一个在工业控制应用中常见的反馈回路部件，由比例单元P、积分单元I和微分单元D组成。PID控制的基础是比例控制；积分控制可消除稳态误差（$e_{ss}$ , Steady-State Errors），但可能增加超调（overshoot）；微分控制可加快大惯性系统响应速度以及减弱超调趋势。</p>
+<h3 id="比例控制-Proportion-Control"><a href="#比例控制-Proportion-Control" class="headerlink" title="比例控制 (Proportion Control)"></a>比例控制 (Proportion Control)</h3><p>&emsp;&emsp;对于某个系统（system），如果要求在 $x$ 状态下实现稳态，设时间t时状态为 $x_0$ ，则偏差 $e(t) = x_0 - x$ 。假定每次的改变量: $$u(t) = k_p e$$&emsp;&emsp;$e(t+T) = e(t) - u(t)$ ，改变量为误差的正比例函数，$kp$ 被称为比例系数（proportional coefficient），那么在经过n次改变之后，显然有： $$e(t) = e(nT) = (1 - k_p)^n \cdot (x_0 - x)$$ &emsp;&emsp;若要让系统能够从某一方向逼近稳态，应满足 $0&lt; k_p\leq1$ ，那么 $e(t)$ 将在无穷处收敛于0，且 $u(t)$ 也为0。$kp$ 越大，则 $\vert e(t)\vert$ 下降速度越快。如果我们减小 $kp$ ，需要更长的时间来逼近 $x$。显然，当我们能足够精确控制系统的改变量，那么最优的情况就是 $k_p=1$，改变一次即可。然而在实际情况中，我们往往无法控制绝对的精度与准确度（precise and accurate），这显然不符合我们的实际需要。（Hint: 在非1的情况下，$e(t)$ 和 $u(t)$ 只能逼近0但不能等于0）</p>
+<p>&emsp;&emsp;为更加切合实际，我们给改变量加上一个新的误差 $c$。为方便分析，我们假定 $c$ 为常数（即每次改变都会有一次常数误差）。那么，$u(t) = k_pe(t)-c$（此时，改变量为偏差的一次函数）。在系统达到稳态时，也就是 $u(t)=0$时，我们有：$$e(t) = e_{ss} = \frac{c}{k_p}$$&emsp;&emsp;这就意味着，只要该误差存在（若 $c$ 不为常数，令 $ c=c(t) $，以上分析对于某一次改变也成立），那么在系统达到稳态时，$\vert e(t)\vert&gt;0$ ，系统无法在稳态下达到状态 $x$，产生了稳态误差，又称静差（steady-state error）。从中我们可以看出，增大 $k_p$ 有利于减小静差（但仍然存在）。</p>
+<p>&emsp;&emsp;①通过上述分析可知，在比例控制中，增大比例系数有利于减小静差并提升速度（加快系统响应），但不利于系统的稳定性；减小比例系数有利于增加系统的稳定性，但会增大静差并减缓速度。在实际应用中，我们需要对二者进行平衡。<br>&emsp;&emsp;② $e(t) = e(nT) = (1 - k_p)^n \cdot (x_0 - x)$ 仅是在理想状态下（无误差）的公式，用来分析比例系数的影响。实际上，e(t)的图像并不完全符合该等式，这是由于每个 $\Delta x$ 都会产生误差。其直观体现就是，当 $ e \to e_{ss} $ 时，$ \Delta x \ne 0 $。也就是说，系统会产生振荡，造成不稳定的现象。</p>
+<h3 id="积分控制（Integral-Control）"><a href="#积分控制（Integral-Control）" class="headerlink" title="积分控制（Integral Control）"></a>积分控制（Integral Control）</h3><p>&emsp;&emsp;通过比例控制的概述，我们可以看到在实际应用中，仅通过比例控制，我们无法消除静差（误差是不可避免的）。那么，我们必然要有一种能够用来消除静差的手段，使系统能够稳定在 $x$ 状态下。令：$$u(t) = k_pe(t)+f(t)$$&emsp;&emsp;我们假设在第n个采样点（$t=nT$），系统达到稳态的情况。也就是说，$e(t)=0 \land u(t)=0$。此时，理论上$u(t)=k_pe(t)+f(t)$。假定此时存在一个误差$c(t)$，则实际$u(t)=k_pe(t)+f(t)-c(t)$。若$f(t)=0$，将产生$e_{ss}=\frac{c(t)}{k_p}$（该情况同比例控制）。为使$e_{ss}=0$，我们必然有$f(t)=f(nT)=c(t)$。这就意味着该函数在平衡时其值为一固定值。</p>
+<p>&emsp;&emsp;我们可以通过如下方式来构造一个f(t)函数：<br>&emsp;&emsp;&emsp;&emsp;①当 $e(t)&gt;0$ 时，$f(t)$ 增加使得 $u(t)$ 增加，令 $e(t)$ 最后能够回到0<br>&emsp;&emsp;&emsp;&emsp;②当 $e(t)&lt;0$ 时，$f(t)$ 减小使得 $u(t)$ 减小，令 $e(t)$ 最后能够回到0<br>&emsp;&emsp;&emsp;&emsp;③当 $e(t)=0$ 时，若 $u(t)\ne0$ ，则 $f(t)$ 仅在该处不变；若 $u(t)=0$ ，则系统达到平衡态，此时满足 $e(t)=0 \land u(t)=0$。</p>
+<p>&emsp;&emsp;显然，对于任意正数 $k_i$ ，函数 $f(t)=k_i\int_0^te(t)dt$ 满足条件①②③。也就是说，我们可以用 $e(t)$ 的积分来消除静差。整合后得到：$$u(t) = k_p\left(e(t)+\frac{1}{T_i}\int_0^te(t)dt\right)$$&emsp;&emsp;在该式中，$T_i$ 为积分时间常量（intergral time constant）。</p>
+<p>&emsp;&emsp;在比例控制的情况下，偏差永远是单方向趋向于$e_{ss}$的，即： $\forall t(e(t)\ge e_{ss}) \lor \forall t(e(t)\le e_{ss})$。若引入积分控制，曲线可能出现振荡使得存在方向相反的组合 $(e(0), e(t))$ 。这种情况，我们称其为超调（overshoot）。显然，$T_i$的减小或$k_p$的增大都会导致超调量的增大，但同时也会加快系统响应。</p>
+<h3 id="微分控制（Differential-Control）"><a href="#微分控制（Differential-Control）" class="headerlink" title="微分控制（Differential Control）"></a>微分控制（Differential Control）</h3><p>&emsp;&emsp;在积分控制中，我们为函数 $f(t)$ 假设了三个条件。而对于积分函数来说，确实能够满足以上三个条件，但却往往不能达到稳定的 $e(t)=0 \land u(t)=0$ 的情况。这是由于误差$c$并不是一个常量，而是一个关于t的函数。为了使系统能够趋向于 $e(t)=0 \land u(t)=0$ 的情况，我们需要增加一个函数h(t)，令 $u(t)= k_p\left(e(t)+\frac{1}{T_i}\int_0^te(t)dt\right) + h(t)$ ，使得 $e(t)$ 能够收敛于0。</p>
+<p>&emsp;&emsp;我们可以通过如下方式来构造一个h(t)函数:<br>&emsp;&emsp;&emsp;&emsp;①当 $u(t)&gt;0$ 时，$h(t)&lt;0$ 使得 $u(t)$ 减小。<br>&emsp;&emsp;&emsp;&emsp;②当 $u(t)&lt;0$ 时，$h(t)&gt;0$ 使得 $u(t)$ 增加。<br>&emsp;&emsp;&emsp;&emsp;③当 $u(t)=0$ 时，$h(t)=0$。 </p>
+<p>&emsp;&emsp;显然，对于 $k_d$，函数$h(t)=k_d\frac{de(t)}{dt}$ 满足条件①②③（其中 $k_d$ 为任意正数）。也就是说，我们可以用 $e(t)$ 的微分来使 $e(t)$ 收敛于0。整合后得到：$$u(t) = k_p\left(e(t)+\frac{1}{T_i}\int_0^te(t)dt+T_d\frac{de(t)}{dt}\right)$$&emsp;&emsp;在该式中，$T_d$为微分时间常量（derived time constant）。</p>
+<p>&emsp;&emsp;为更好地理解微分的抑制作用，我们假设采样周期为T，目前的时间为t。我们有：$$u(t)=e(t)-e(t+T)=k_pe(t)+\frac{k_p}{T_i}\int_0^te(t)dt+k_pT_d\frac{e(t+T)-e(t)}{T}$$$$u(t)=\frac{k_pe(t)+\frac{k_p}{T_i}\int_0^te(t)dt}{1+ \frac{k_pT_d}{T}}$$&emsp;&emsp;显然，微分抑制了u(t)的变化直至u(t)趋向于0。</p>
+<p>&emsp;&emsp;所以说，微分的作用就是在相应过程中抑制偏差向任何方向的变化，提高系统的稳定性（类似刹车）。若微分常数过大，也可能会使系统提前制动。同时，一阶微分可能会放大高频噪声（即u(t)较大）</p>
+<p>综上所述，PID控制只能使系统在目标处趋向于稳定，但不能使系统绝对稳定。</p>
+<h3 id="PID算法离散化表达（Discretization）"><a href="#PID算法离散化表达（Discretization）" class="headerlink" title="PID算法离散化表达（Discretization）"></a>PID算法离散化表达（Discretization）</h3><p>&emsp;&emsp;假设采样周期为 $T$，当前已采样 $n$ 次，此时时间为 $nT$，有：$$u(nT)=k_p\left(e(nT)+\frac{T}{T_i}\sum_{j=0}^ne(jT)+\frac{T_d}{T}(e(nT)-e((n-1)T))\right)$$&emsp;&emsp;令 $k_i=\frac{k_pT}{T_i}$ ，$k_d=\frac{k_pT_d}{T}$，得到：$$u(nT)=k_pe(nT)+k_i\sum_{j=0}^ne(jT)+k_d(e(nT)-e((n-1)T))$$$$\Delta u(nT)=u(nT)-u((n-1)T)=k_p(e(nT)-e((n-1)T))+k_ie(nT)+k_d(e(nT)-2e((n-1)T)+e((n-2)T))$$<br>&emsp;&emsp;显然，$u(nT) = u((n-1)T) + \Delta u(nT)$</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kenen.com/2018/11/16/PID-principle/" data-id="cjojfwm9b0000qcuy4xxnrx47" class="article-share-link">Share</a>
+      <a data-url="http://kenen.com/2018/11/16/PID-principle/" data-id="cjonqrz4e0003f0uydpy0dnwh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mathematics/">Mathematics</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PID/">PID</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RoboMaster/">RoboMaster</a></li></ul>
@@ -193,7 +203,7 @@ MathJax.Hub.Config({
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://kenen.com/2018/11/13/hello-world/" data-id="cjojfwmbd0009qcuyfttj080a" class="article-share-link">Share</a>
+      <a data-url="http://kenen.com/2018/11/13/hello-world/" data-id="cjonqrz3x0001f0uynxq5gzg1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -243,10 +253,10 @@ MathJax.Hub.Config({
   <div class="widget">
     <img class="avatar" src="https://avatars3.githubusercontent.com/u/34621978?s=460&amp;v=4">
     <h2 class="author">Kenen</h2>
-    <h3 class="description"></h3>
+    <h3 class="description">Hello!</h3>
     <div class="count-box">
       <a href="/archives"><div><strong>2</strong><br>文章</div></a>
-      <a href="/categories"><div><strong>2</strong><br>分类</div></a>
+      <a href="/categories"><div><strong>3</strong><br>分类</div></a>
       <a href="/tags"><div><strong>3</strong><br>标签</div></a>
     </div>
 
