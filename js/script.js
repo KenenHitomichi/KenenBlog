@@ -1,9 +1,9 @@
 (function($){
   // Search
   var footerHeight = footer.offsetHeight;
-  var url = document.location.toString();
-  console.log(url);
-  if (url=="http://localhost:4000/" || url=="http://www.kenen-blog.com/") $(".comments").css("display","none");
+  // var url = document.location.toString();
+  // console.log(url);
+  // if (url=="http://localhost:4000/" || url=="http://www.kenen-blog.com/") $(".comments").css("display","none");
   $("#wrap > .outer").css("min-height",document.body.offsetHeight - footerHeight + "px");
   $(window).resize(()=> { $("#wrap > .outer").css("min-height",document.body.offsetHeight - footerHeight + "px");});
   setTimeout(()=>{$("#wrap > .outer").css("min-height",document.body.offsetHeight - footer.offsetHeight + "px");}, 2000); 
